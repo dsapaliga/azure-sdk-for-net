@@ -7,7 +7,7 @@ using System;
 namespace Azure.Communication.CallAutomation
 {
     /// <summary>
-    /// Failure Reason for incoming webhook events.
+    /// Reason Codes for incoming webhook events.
     /// </summary>
     public readonly partial struct ReasonCode : IEquatable<ReasonCode>
     {
@@ -22,16 +22,18 @@ namespace Azure.Communication.CallAutomation
 
         private const string RecognizeInitialSilenceTimedOutValue = "8510";
         private const string RecognizeInterDigitTimedOutValue = "8532";
+        private const string RecognizeDtmfOptionMatchedValue = "8533";
         private const string RecognizePlayPromptFailedValue = "8511";
 
         private const string RecognizeMaxDigitsReceivedValue = "8531";
         private const string RecognizeStopToneDetectedValue = "8514";
+        private const string RecognizeSpeechOptionMatchedValue = "8545";
+        private const string RecognizeSpeechOptionNotMatchedValue = "8547";
 
         private const string PlayDownloadFailedValue = "8536";
         private const string PlayInvalidFileFormatValue = "8535";
 
         private const string CompletedSuccessfullyValue = "0";
-        private const string OperationCancelledValue = "8508";
         private const string UnspecifiedErrorValue = "9999";
 
         /// <summary> Action failed, initial silence timeout reached. </summary>
@@ -46,6 +48,13 @@ namespace Azure.Communication.CallAutomation
         /// <summary> Action completed as stop tone was detected. </summary>
         public static ReasonCode RecognizeStopToneDetected { get; } = new ReasonCode(RecognizeStopToneDetectedValue);
 
+        /// <summary> Action failed, play source not working. </summary>
+        public static ReasonCode RecognizeDtmfOptionMatched { get; } = new ReasonCode(RecognizeDtmfOptionMatchedValue);
+        /// <summary> Speeach option matched. </summary>
+        public static ReasonCode RecognizeSpeechOptionMatched { get; } = new ReasonCode(RecognizeSpeechOptionMatchedValue);
+        /// <summary> Speeach option  not matched. </summary>
+        public static ReasonCode RecognizeSpeechOptionNotMatched { get; } = new ReasonCode(RecognizeSpeechOptionNotMatchedValue);
+
         /// <summary> Action failed, file could not be downloaded. </summary>
         public static ReasonCode PlayDownloadFailed { get; } = new ReasonCode(PlayDownloadFailedValue);
         /// <summary> Action failed, file could not be downloaded. </summary>
@@ -55,8 +64,6 @@ namespace Azure.Communication.CallAutomation
         public static ReasonCode CompletedSuccessfully { get; } = new ReasonCode (CompletedSuccessfullyValue);
         /// <summary> Unknown internal server error. </summary>
         public static ReasonCode UnspecifiedError { get; } = new ReasonCode(UnspecifiedErrorValue);
-        /// <summary> Action falied, the operation was cancelled. </summary>
-        public static ReasonCode OperationCancelled { get; } = new ReasonCode(OperationCancelledValue);
 
         /// <summary> Determines if two <see cref="ReasonCode"/> values are the same. </summary>
         public static bool operator ==(ReasonCode left, ReasonCode right) => left.Equals(right);
